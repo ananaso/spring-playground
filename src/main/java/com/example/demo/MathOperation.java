@@ -1,16 +1,24 @@
 package com.example.demo;
 
-public class MathOperation {
-    private final Integer x;
-    private final Integer y;
-    private final String op;
-    private final Integer result;
+import java.util.LinkedList;
+import java.util.List;
 
-    public MathOperation(String x, String y, String operation) {
-        this.x = Integer.parseInt(x);
-        this.y = Integer.parseInt(y);
+public class MathOperation {
+    private Integer x = 0;
+    private Integer y = 0;
+    private String op = "add";
+    private Integer result = 0;
+    private List<String> values = new LinkedList<>();
+
+    public MathOperation(Integer x, Integer y, String operation) {
+        this.x = x;
+        this.y = y;
         this.op = operation != null ? operation : "add";
         this.result = this.calculateResult();
+    }
+
+    public MathOperation(List<String> n) {
+        this.values = n;
     }
 
     private Integer calculateResult() {

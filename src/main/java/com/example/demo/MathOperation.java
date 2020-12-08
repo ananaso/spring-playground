@@ -10,18 +10,12 @@ public class MathOperation {
     private Integer y = 0;
     private String op = "add";
     private Integer result = 0;
-    private Set<Integer> values = new HashSet<>();
 
     public MathOperation(Integer x, Integer y, String operation) {
         this.x = x;
         this.y = y;
-        this.values.addAll(Arrays.asList(x, y));
         this.op = operation != null ? operation : "add";
         this.result = this.calculateResult();
-    }
-
-    public MathOperation(Set<Integer> n) {
-        this.values = n;
     }
 
     private Integer calculateResult() {
@@ -39,14 +33,6 @@ public class MathOperation {
                                 break;
         }
         return result;
-    }
-
-    public static String getVolumeString(Map<String, String> sideLengths) {
-        int length = Integer.parseInt(sideLengths.get("length"));
-        int width = Integer.parseInt(sideLengths.get("width"));
-        int height = Integer.parseInt(sideLengths.get("height"));
-        int volume = length * width * height;
-        return String.format("The volume of a %dx%dx%d rectangle is %d", length, width, height, volume);
     }
 
     private String getOpSymbol() {
@@ -69,5 +55,29 @@ public class MathOperation {
     @Override
     public String toString() {
         return String.format("%d %s %d = %d", this.x, this.getOpSymbol(), this.y, this.result);
+    }
+
+    public static String getVolumeString(Map<String, String> sideLengths) {
+        int length = Integer.parseInt(sideLengths.get("length"));
+        int width = Integer.parseInt(sideLengths.get("width"));
+        int height = Integer.parseInt(sideLengths.get("height"));
+        int volume = length * width * height;
+        return String.format("The volume of a %dx%dx%d rectangle is %d", length, width, height, volume);
+    }
+
+    public static String getSumString(int[] values) {
+        int sum = 0;
+        StringBuilder valStr = new StringBuilder();
+        for (int i = 0; i < values.length; i++) {
+            int val = values[i];
+            sum += val;
+            valStr.append(val);
+            if (i == values.length - 1) {
+                valStr.append(" = ");
+            } else {
+                valStr.append(" + ");
+            }
+        }
+        return String.format("%s%d", valStr.toString(), sum);
     }
 }

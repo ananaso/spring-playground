@@ -24,8 +24,8 @@ public class SpringMathController {
     }
 
     @PostMapping("/sum")
-    public String sum(@RequestParam Set<Integer> n) {
-        return n.toString();
+    public String sum(@RequestParam int[] n) {
+        return MathOperation.getSumString(n);
     }
 
     @RequestMapping("/volume/{length}/{width}/{height}")

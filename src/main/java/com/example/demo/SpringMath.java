@@ -13,7 +13,7 @@ public class SpringMath {
         return "3.141592653589793";
     }
 
-    @PostMapping("/calculate")
+    @GetMapping("/calculate")
     public String calculate(MathOperation mathOp) {
         return mathOp.toString();
     }

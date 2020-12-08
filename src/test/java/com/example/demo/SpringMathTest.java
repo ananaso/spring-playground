@@ -26,7 +26,7 @@ public class SpringMathTest {
 
     @Test
     public void calculateCanAddTwoNumbers() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?operation=add&x=4&y=6");
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=add&x=4&y=6");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -35,7 +35,7 @@ public class SpringMathTest {
 
     @Test
     public void calculateCanMultiplyTwoNumbers() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?operation=multiply&x=4&y=6");
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=multiply&x=4&y=6");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -44,7 +44,7 @@ public class SpringMathTest {
 
     @Test
     public void calculateCanSubtractTwoNumbers() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?operation=subtract&x=4&y=6");
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=subtract&x=4&y=6");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -53,7 +53,7 @@ public class SpringMathTest {
 
     @Test
     public void calculateCanDivideTwoNumbers() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?operation=divide&x=30&y=5");
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=divide&x=30&y=5");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -62,7 +62,7 @@ public class SpringMathTest {
 
     @Test
     public void calculateDefaultAddTwoNumbers() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?x=30&y=5");
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?x=30&y=5");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())

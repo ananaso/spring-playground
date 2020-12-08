@@ -16,13 +16,13 @@ public class MathOperation {
     private Integer calculateResult() {
         int result;
         switch (this.op) {
-            case "add":         result = this.x + this.y;
+            case "add":         result = Math.addExact(this.x, this.y);
                                 break;
-            case "multiply":    result = this.x * this.y;
+            case "multiply":    result = Math.multiplyExact(this.x, this.y);
                                 break;
-            case "subtract":    result = this.x - this.y;
+            case "subtract":    result = Math.subtractExact(this.x, this.y);
                                 break;
-            case "divide":      result = this.x / this.y;
+            case "divide":      result = Math.floorDiv(this.x, this.y);
                                 break;
             default:            result = 0;
                                 break;

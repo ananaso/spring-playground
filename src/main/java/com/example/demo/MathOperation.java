@@ -9,7 +9,7 @@ public class MathOperation {
     public MathOperation(String x, String y, String operation) {
         this.x = Integer.parseInt(x);
         this.y = Integer.parseInt(y);
-        this.op = operation;
+        this.op = operation != null ? operation : "add";
         this.result = this.calculateResult();
     }
 
@@ -19,6 +19,10 @@ public class MathOperation {
             case "add":         result = this.x + this.y;
                                 break;
             case "multiply":    result = this.x * this.y;
+                                break;
+            case "subtract":    result = this.x - this.y;
+                                break;
+            case "divide":      result = this.x / this.y;
                                 break;
             default:            result = 0;
                                 break;
@@ -56,6 +60,10 @@ public class MathOperation {
             case "add":         opSymbol = "+";
                                 break;
             case "multiply":    opSymbol = "*";
+                                break;
+            case "subtract":    opSymbol = "-";
+                                break;
+            case "divide":      opSymbol = "/";
                                 break;
             default:            opSymbol = "bad opCode";
                                 break;

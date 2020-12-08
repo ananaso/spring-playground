@@ -10,8 +10,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(SpringMath.class)
-public class SpringMathTest {
+@WebMvcTest(SpringMathController.class)
+public class SpringMathControllerTest {
     @Autowired
     MockMvc mvc;
 
@@ -67,5 +67,14 @@ public class SpringMathTest {
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("30 + 5 = 35"));
+    }
+
+    @Test
+    public void sumAddMultipleNumbers() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/sum?n=4&n=5&n=6");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 5 + 6 = 15"));
     }
 }

@@ -1,4 +1,4 @@
-package com.galvanize.springMath;
+package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(SpringMathPiWithGet.class)
-public class SpringMathPiWithGetTest {
+@WebMvcTest(SpringMath.class)
+public class SpringMathTest {
     @Autowired
     MockMvc mvc;
 
@@ -22,5 +22,23 @@ public class SpringMathPiWithGetTest {
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("3.141592653589793"));
+    }
+
+    @Test
+    public void calculateCanAddTwoNumbers() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?operation=add&x=4&y=6");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 6 = 10"));
+    }
+
+    @Test
+    public void calculateCanMultiplyTwoNumbers() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.post("/math/calculate?operation=multiply&x=4&y=6");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 * 6 = 24"));
     }
 }

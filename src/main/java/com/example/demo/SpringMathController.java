@@ -1,9 +1,9 @@
 package com.example.demo;
 
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/math")
@@ -24,8 +24,13 @@ public class SpringMathController {
     }
 
     @PostMapping("/sum")
-    public String sum(@RequestParam MultiValueMap<String, String> paramMap) {
-
-        return "hello";
+    public String sum(@RequestParam Set<Integer> n) {
+        return n.toString();
     }
+
+    @RequestMapping("/volume/{length}/{width}/{height}")
+    public String volume(@PathVariable Map<String, String> pathVariables) {
+        return MathOperation.getVolumeString(pathVariables);
+    }
+
 }

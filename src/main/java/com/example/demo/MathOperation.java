@@ -1,23 +1,26 @@
 package com.example.demo;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class MathOperation {
     private Integer x = 0;
     private Integer y = 0;
     private String op = "add";
     private Integer result = 0;
-    private List<String> values = new LinkedList<>();
+    private Set<Integer> values = new HashSet<>();
 
     public MathOperation(Integer x, Integer y, String operation) {
         this.x = x;
         this.y = y;
+        this.values.addAll(Arrays.asList(x, y));
         this.op = operation != null ? operation : "add";
         this.result = this.calculateResult();
     }
 
-    public MathOperation(List<String> n) {
+    public MathOperation(Set<Integer> n) {
         this.values = n;
     }
 
@@ -36,6 +39,14 @@ public class MathOperation {
                                 break;
         }
         return result;
+    }
+
+    public static String getVolumeString(Map<String, String> sideLengths) {
+        int length = Integer.parseInt(sideLengths.get("length"));
+        int width = Integer.parseInt(sideLengths.get("width"));
+        int height = Integer.parseInt(sideLengths.get("height"));
+        int volume = length * width * height;
+        return String.format("The volume of a %dx%dx%d rectangle is %d", length, width, height, volume);
     }
 
     private String getOpSymbol() {

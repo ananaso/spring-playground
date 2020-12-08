@@ -1,9 +1,9 @@
 package com.example.demo;
 
 public class MathOperation {
-    private Integer x;
-    private Integer y;
-    private String op;
+    private final Integer x;
+    private final Integer y;
+    private final String op;
     private final Integer result;
 
     public MathOperation(String x, String y, String operation) {
@@ -28,30 +28,6 @@ public class MathOperation {
                                 break;
         }
         return result;
-    }
-
-    public String getX() {
-        return x.toString();
-    }
-
-    public void setX(String x) {
-        this.x = Integer.parseInt(x);
-    }
-
-    public String getY() {
-        return y.toString();
-    }
-
-    public void setY(String y) {
-        this.y = Integer.parseInt(y);
-    }
-
-    public String getOp() {
-        return op;
-    }
-
-    public void setOp(String op) {
-        this.op = op;
     }
 
     private String getOpSymbol() {

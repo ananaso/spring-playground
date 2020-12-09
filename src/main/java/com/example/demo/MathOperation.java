@@ -17,19 +17,18 @@ public class MathOperation {
 
     public static String getArea(Map<String, String> body) {
         String type = body.get("type");
-        double area = 0;
         StringBuilder outStr = new StringBuilder("Area of a ");
         Locale locale = Locale.forLanguageTag("en-US");
         if (type.equals("circle")) {
             int radius = Integer.parseInt(body.get("radius"));
-            area = Math.PI * Math.pow(radius, 2);
+            double area = Math.PI * Math.pow(radius, 2);
 
             String strEnd = String.format(locale, "circle with a radius of %d is %.5f", radius, area);
             outStr.append(strEnd);
         } else if (type.equals("rectangle")) {
             int width = Integer.parseInt(body.get("width"));
             int height = Integer.parseInt(body.get("height"));
-            area = Math.multiplyExact(width, height);
+            int area = width * height;
 
             String strEnd = String.format(locale, "%dx%d rectangle is %d", width, height, area);
             outStr.append(strEnd);

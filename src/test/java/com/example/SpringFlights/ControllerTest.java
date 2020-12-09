@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.SpringFlights;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class SpringFlightsControllerTest {
+public class ControllerTest {
     @Autowired
     private MockMvc mvc;
 
@@ -33,6 +33,8 @@ public class SpringFlightsControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.tickets", is("[]")));
+                .andExpect(jsonPath("$.tickets[0].passenger.firstName", is("Some name")))
+                .andExpect(jsonPath("$.tickets[0].passenger.lastName", is("Some other name")))
+                .andExpect(jsonPath("$.tickets[0].price", is(200)));
     }
 }

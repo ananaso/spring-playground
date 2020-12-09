@@ -33,4 +33,8 @@ public class SpringMathController {
         return MathOperation.getVolumeString(pathVariables);
     }
 
+    @PostMapping("/area")
+    public String area(@RequestParam Map<String, String> body) {
+        return MathOperation.getArea(body);
+    }
 }

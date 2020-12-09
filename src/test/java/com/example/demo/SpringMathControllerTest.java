@@ -125,4 +125,17 @@ public class SpringMathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Area of a 4x7 rectangle is 28"));
     }
+
+    @Test
+    public void areaRectangleReturnsInvalidForIncorrectFormData() throws Exception {
+        MockHttpServletRequestBuilder request = post("/math/area")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("type", "rectangle")
+                .param("radius", "5");
+
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Invalid"));
+    }
 }

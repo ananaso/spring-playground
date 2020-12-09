@@ -34,6 +34,13 @@ public class SpringMathController {
 
     @PostMapping("/area")
     public String area(@RequestParam Map<String, String> body) {
-        return MathOperation.getArea(body);
+        String type = body.get("type");
+        boolean hasCircleParams = type.equals("circle") && body.containsKey("radius");
+        boolean hasRectangleParams = type.equals("rectangle") && body.containsKey("width") && body.containsKey("height");
+        if (hasCircleParams || hasRectangleParams) {
+            return MathOperation.getArea(body);
+        } else {
+            return "Invalid";
+        }
     }
 }

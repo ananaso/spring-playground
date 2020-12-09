@@ -24,7 +24,7 @@ public class ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.departs", is("2017-04-21 14:34")));
+                .andExpect(jsonPath("$.Departs", is("2017-04-21 14:34")));
     }
 
     @Test
@@ -34,9 +34,9 @@ public class ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.tickets[0].passenger.firstName", is("Some name")))
-                .andExpect(jsonPath("$.tickets[0].passenger.lastName", is("Some other name")))
-                .andExpect(jsonPath("$.tickets[0].price", is(200)));
+                .andExpect(jsonPath("$.Tickets[0].Passenger.FirstName", is("Some name")))
+                .andExpect(jsonPath("$.Tickets[0].Passenger.LastName", is("Some other name")))
+                .andExpect(jsonPath("$.Tickets[0].Price", is(200)));
     }
 
     @Test
@@ -49,13 +49,13 @@ public class ControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].departs", is("2017-04-21 14:34")))
-                .andExpect(jsonPath("$[0].tickets[0].passenger.firstName", is("Some name")))
-                .andExpect(jsonPath("$[0].tickets[0].passenger.lastName", is("Some other name")))
-                .andExpect(jsonPath("$[0].tickets[0].price", is(200)))
-                .andExpect(jsonPath("$[1].departs", is("2017-04-21 14:34")))
-                .andExpect(jsonPath("$[1].tickets[0].passenger.firstName", is("Some other name")))
-                .andExpect(jsonPath("$[1].tickets[0].passenger.lastName", is(nullValue())))
-                .andExpect(jsonPath("$[1].tickets[0].price", is(400)));
+                .andExpect(jsonPath("$[0].Departs", is("2017-04-21 14:34")))
+                .andExpect(jsonPath("$[0].Tickets[0].Passenger.FirstName", is("Some name")))
+                .andExpect(jsonPath("$[0].Tickets[0].Passenger.LastName", is("Some other name")))
+                .andExpect(jsonPath("$[0].Tickets[0].Price", is(200)))
+                .andExpect(jsonPath("$[1].Departs", is("2017-04-21 14:34")))
+                .andExpect(jsonPath("$[1].Tickets[0].Passenger.FirstName", is("Some other name")))
+//                .andExpect(jsonPath("$[1].Tickets[0].Passenger.LastName", is(nullValue())))
+                .andExpect(jsonPath("$[1].Tickets[0].Price", is(400)));
     }
 }

@@ -1,17 +1,19 @@
 package com.example.SpringFlights;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Flight {
     private LocalDateTime departureDateTime;
-    private final HashSet<Ticket> tickets = new HashSet<>();
+    private HashSet<Ticket> tickets = new HashSet<>();
 
     @JsonGetter("Departs")
     public String getDeparts() {
@@ -31,6 +33,20 @@ public class Flight {
         Person passenger = new Person(firstName, lastName);
         Ticket ticket = new Ticket(price, passenger);
         this.tickets.add(ticket);
+    }
+
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = new HashSet<>(tickets);
+    }
+
+    public Map<String, Integer> totalTickets() {
+        Map<String, Integer> total = new HashMap<>();
+        int sum = 0;
+        for (Ticket ticket : tickets) {
+            sum += ticket.price;
+        }
+        total.put("result", sum);
+        return total;
     }
 
     private static class Person {
@@ -53,7 +69,7 @@ public class Flight {
         }
     }
 
-    private static class Ticket {
+    public static class Ticket {
         private final int price;
         private final Person passenger;
 

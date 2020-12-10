@@ -1,11 +1,8 @@
 package com.example.SpringFlights;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 @RestController
 @RequestMapping("/flights")
@@ -30,5 +27,12 @@ public class Controller {
         flight02.addTicket(400, "Some other name", null);
         flights.add(flight02);
         return flights;
+    }
+
+    @PostMapping("/tickets/total")
+    public Map<String, Integer> totalTickets(@RequestBody Map<String, ArrayList<Flight.Ticket>> tickets) {
+        Flight flight = new Flight();
+        flight.setTickets(tickets.get("tickets"));
+        return flight.totalTickets();
     }
 }

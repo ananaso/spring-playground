@@ -25,7 +25,8 @@ public class LessonsController {
 
     @GetMapping("/{id}")
     public Optional<Lesson> getByID(@PathVariable Long id) {
-        return this.repository.findById(id);
+        Optional<Lesson> lesson = this.repository.findById(id);
+        return lesson;
     }
 
     @DeleteMapping("/{id}")

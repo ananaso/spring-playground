@@ -44,4 +44,9 @@ public class LessonsController {
         });
         return oldLesson;
     }
+
+    @GetMapping("/find/{title}")
+    public Lesson getByTitle(@PathVariable String title) {
+        return this.repository.findByTitle(title);
+    }
 }

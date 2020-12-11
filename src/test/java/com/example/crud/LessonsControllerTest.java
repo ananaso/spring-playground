@@ -54,7 +54,7 @@ public class LessonsControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(2)))
+                .andExpect(jsonPath("$.id", instanceOf(Number.class)))
                 .andExpect(jsonPath("$.title", is("JPA1")));
     }
 
@@ -75,27 +75,26 @@ public class LessonsControllerTest {
         String title = "Spring Security";
         String json = String.format("{\"title\":\"%s\",\"deliveredOn\":\"%s\"}", title, today);
 
-        MockHttpServletRequestBuilder deleteRequest = patch("/lessons/6")
+        MockHttpServletRequestBuilder deleteRequest = patch("/lessons/7")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json);
 
         // delete has to return OK status
         this.mvc.perform(deleteRequest)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(6)))
+                .andExpect(jsonPath("$.id", instanceOf(Number.class)))
                 .andExpect(jsonPath("$.title", is(title)));
     }
 
     @Test
     @Transactional
-    @Rollback
     public void canGetByTitle() throws Exception {
         MockHttpServletRequestBuilder request = get("/lessons/find/JPA0");
 
         // delete has to return OK status
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(7)))
+                .andExpect(jsonPath("$.id", instanceOf(Number.class)))
                 .andExpect(jsonPath("$.title", is("JPA0")));
     }
 }

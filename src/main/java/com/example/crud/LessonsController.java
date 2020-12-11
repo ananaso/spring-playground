@@ -2,6 +2,8 @@ package com.example.crud;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/lessons")
 public class LessonsController {
@@ -19,5 +21,15 @@ public class LessonsController {
     @PostMapping("")
     public Lesson create(@RequestBody Lesson lesson) {
         return this.repository.save(lesson);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Lesson> getByID(@PathVariable Long id) {
+        return this.repository.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteByID(@PathVariable Long id) {
+        this.repository.deleteById(id);
     }
 }

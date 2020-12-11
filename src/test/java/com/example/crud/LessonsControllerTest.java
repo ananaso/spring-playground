@@ -69,4 +69,23 @@ public class LessonsControllerTest {
         this.mvc.perform(deleteRequest)
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void canPatch() throws Exception {
+        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String title = "Spring Security";
+        String json = String.format("{\"title\":\"%s\",\"deliveredOn\":\"%s\"}", title, today);
+
+        MockHttpServletRequestBuilder deleteRequest = patch("/lessons/15")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        // delete has to return OK status
+        this.mvc.perform(deleteRequest)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(15)))
+                .andExpect(jsonPath("$.title", is(title)));
+    }
 }

@@ -32,7 +32,7 @@ public class LessonsControllerTest {
     public void putWithLoop() throws Exception {
         String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 2; i++) {
             String title = "JPA";
             String json = String.format("{\"title\":\"%s\",\"deliveredOn\":\"%s\"}", title, today);
 
@@ -51,11 +51,11 @@ public class LessonsControllerTest {
     @Transactional
     @Rollback
     public void canGetByID() throws Exception {
-        MockHttpServletRequestBuilder request = get("/lessons/4");
+        MockHttpServletRequestBuilder request = get("/lessons/2");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(4)))
+                .andExpect(jsonPath("$.id", is(2)))
                 .andExpect(jsonPath("$.title", is("JPA")));
     }
 
@@ -63,7 +63,7 @@ public class LessonsControllerTest {
     @Transactional
     @Rollback
     public void canDelete() throws Exception {
-        MockHttpServletRequestBuilder deleteRequest = delete("/lessons/8");
+        MockHttpServletRequestBuilder deleteRequest = delete("/lessons/3");
 
         // delete has to return OK status
         this.mvc.perform(deleteRequest)
@@ -78,14 +78,14 @@ public class LessonsControllerTest {
         String title = "Spring Security";
         String json = String.format("{\"title\":\"%s\",\"deliveredOn\":\"%s\"}", title, today);
 
-        MockHttpServletRequestBuilder deleteRequest = patch("/lessons/15")
+        MockHttpServletRequestBuilder deleteRequest = patch("/lessons/6")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json);
 
         // delete has to return OK status
         this.mvc.perform(deleteRequest)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(15)))
+                .andExpect(jsonPath("$.id", is(6)))
                 .andExpect(jsonPath("$.title", is(title)));
     }
 }

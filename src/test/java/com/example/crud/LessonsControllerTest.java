@@ -33,7 +33,7 @@ public class LessonsControllerTest {
         String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         for (int i = 0; i < 2; i++) {
-            String title = "JPA";
+            String title = "JPA" + i;
             String json = String.format("{\"title\":\"%s\",\"deliveredOn\":\"%s\"}", title, today);
 
             MockHttpServletRequestBuilder request = post("/lessons")
@@ -49,19 +49,17 @@ public class LessonsControllerTest {
 
     @Test
     @Transactional
-    @Rollback
     public void canGetByID() throws Exception {
         MockHttpServletRequestBuilder request = get("/lessons/2");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(2)))
-                .andExpect(jsonPath("$.title", is("JPA")));
+                .andExpect(jsonPath("$.title", is("JPA1")));
     }
 
     @Test
     @Transactional
-    @Rollback
     public void canDelete() throws Exception {
         MockHttpServletRequestBuilder deleteRequest = delete("/lessons/3");
 
@@ -72,7 +70,6 @@ public class LessonsControllerTest {
 
     @Test
     @Transactional
-    @Rollback
     public void canPatch() throws Exception {
         String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String title = "Spring Security";
@@ -87,5 +84,18 @@ public class LessonsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(6)))
                 .andExpect(jsonPath("$.title", is(title)));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void canGetByTitle() throws Exception {
+        MockHttpServletRequestBuilder request = get("/lessons/find/JPA0");
+
+        // delete has to return OK status
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(7)))
+                .andExpect(jsonPath("$.title", is("JPA0")));
     }
 }

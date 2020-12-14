@@ -30,7 +30,7 @@ class WordCounterControllerTest {
 //                "  \"fox\": 1\n" +
 //                "}\n";
 //        expectedJSON = expectedJSON.replaceAll("\n", "");
-        String expectedJSON = "{\"over\":1,\"A\":1,\"a\":1,\"jumps\":1,\"cow\":1,\"brown\":2,\"fox\":1}";
+        String expectedJSON = "{\"over\":1,\"a\":2,\"jumps\":1,\"cow\":1,\"brown\":2,\"fox\":1}";
 
         String inputText = "A brown cow jumps over a brown fox";
 

@@ -11,7 +11,7 @@ public class WordCounter {
 
     public Map<String, Integer> count(String str) {
         Map<String, Integer> wordCountMap = new HashMap<>();
-        for (String word : str.replaceAll("[^a-zA-Z ]", "").split(" ")) {
+        for (String word : str.replaceAll("[^a-zA-Z ]", "").toLowerCase().split(" ")) {
             if(wordCountMap.containsKey(word)) {
                 Integer count = wordCountMap.get(word) + 1;
                 wordCountMap.put(word, count);

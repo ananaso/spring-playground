@@ -2,6 +2,11 @@ package com.example.crud;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @RestController
@@ -25,8 +30,7 @@ public class LessonsController {
 
     @GetMapping("/{id}")
     public Optional<Lesson> getByID(@PathVariable Long id) {
-        Optional<Lesson> lesson = this.repository.findById(id);
-        return lesson;
+        return this.repository.findById(id);
     }
 
     @DeleteMapping("/{id}")
@@ -48,5 +52,17 @@ public class LessonsController {
     @GetMapping("/find/{title}")
     public Lesson getByTitle(@PathVariable String title) {
         return this.repository.findByTitle(title);
+    }
+
+    @GetMapping("/between")
+    public List<Lesson> getBetweenDates(@RequestParam String date1, @RequestParam String date2) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyy-MM-dd", Locale.US);
+        Date ld1 = formatter.parse(date1);
+        Date ld2 = formatter.parse(date2);
+//        Alternate method for formatting
+//        ZoneId defaultZoneId = ZoneId.systemDefault();
+//        Date ld1 = Date.from(LocalDate.parse(date1).atStartOfDay(defaultZoneId).toInstant());
+//        Date ld2 = Date.from(LocalDate.parse(date2).atStartOfDay(defaultZoneId).toInstant());
+        return this.repository.findBetweenDates(ld1, ld2);
     }
 }

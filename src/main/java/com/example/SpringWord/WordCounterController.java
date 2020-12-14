@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/words")
 public class WordCounterController {
@@ -15,8 +17,8 @@ public class WordCounterController {
     private WordCounter wordCounter;
 
     @PostMapping("/count")
-    public String getWordCount(@RequestBody String str) {
-        return this.wordCounter.count(str).toString();
+    public Map<String, Integer> getWordCount(@RequestBody String str) {
+        return this.wordCounter.count(str);
     }
 //
 //    private String prettifyJSONString(String str) {
